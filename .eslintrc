@@ -30,18 +30,9 @@
       }
     ],
     "@typescript-eslint/no-explicit-any": [
-      "error",
-      {
-        "ignoreRestArgs": true
-      }
-    ],
-    "max-len": [
       "warn",
       {
-        "code": 80,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreComments": true
+        "ignoreRestArgs": true
       }
     ],
     "no-plusplus": [
