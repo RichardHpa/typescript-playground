@@ -1,24 +1,26 @@
-import { useCallback, useState } from 'react'
-import { RequestButton } from './components/RequestButton'
-import { Typography } from '@mui/material'
-import { getCharacter } from './apis/characters'
+import { Routes, Route } from 'react-router-dom'
+import { HomePage, RequestButtonPage, ReactModalPage } from './pages'
+import { Header } from './components/Header'
+import { Container, Box } from '@mui/material'
 
 function App() {
-  const [character, setCharacter] = useState('No Character')
-
-  const handleClick = useCallback(async () => {
-    const randNum = Math.floor(Math.random() * 10) + 1
-    const response = await getCharacter({ characterId: randNum })
-    setCharacter(response.name)
-  }, [])
-
   return (
-    <div className="App">
-      <RequestButton variant="contained" onRequest={handleClick}>
-        Test
-      </RequestButton>
-      {character && <Typography>{character}</Typography>}
-    </div>
+    <>
+      <Header />
+      <Container>
+        <Box
+          sx={{
+            marginTop: 4,
+          }}
+        >
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/request-button" element={<RequestButtonPage />} />
+            <Route path="react-modal" element={<ReactModalPage />} />
+          </Routes>
+        </Box>
+      </Container>
+    </>
   )
 }
 
