@@ -1,0 +1,1 @@
+export { ReactModalPage } from './ReactModal'
