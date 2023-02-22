@@ -1,0 +1,1 @@
+export { TableVirtualizedPage } from './TableVirtualized'

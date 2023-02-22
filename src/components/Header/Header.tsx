@@ -14,6 +14,14 @@ const pages = [
     name: 'React Modal',
     path: '/react-modal',
   },
+  {
+    name: 'Table Virtualized',
+    path: '/table-virtualized',
+  },
+  {
+    name: 'List Virtualized',
+    path: '/list-virtualized',
+  },
 ]
 
 export const Header = () => {
