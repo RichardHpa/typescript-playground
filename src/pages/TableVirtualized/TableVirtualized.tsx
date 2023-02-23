@@ -1,16 +1,22 @@
 import { useEffect, useState } from 'react'
-import { Box, Paper } from '@mui/material'
+import { Box, Paper, Avatar } from '@mui/material'
 
-import { TableVirtualized } from '../../components/TableVirtualized'
+import { TableVirtualized } from 'components/TableVirtualized'
 
-import { getExpansion } from '../../apis/pokemontcg'
+import { getExpansion } from 'apis/pokemontcg'
 
-const expansion = 'swsh12pt5gg'
+const expansion = 'swsh8'
 
 const columns = [
-  { dataKey: 'number', label: 'Number', flexGrow: 1 },
-  { dataKey: 'name', label: 'Name', flexGrow: 1 },
-  { dataKey: 'flavorText', label: 'Flavor Text', flexGrow: 3 },
+  {
+    dataKey: 'image.small',
+    label: '',
+    width: 50,
+    render: (row: any) => <Avatar alt={row.name} src={row.images.small} />,
+  },
+  { dataKey: 'number', label: 'Number', width: 80 },
+  { dataKey: 'name', label: 'Name', width: 200 },
+  { dataKey: 'flavorText', label: 'Flavor Text', width: 0, flexGrow: 1 },
 ]
 
 export const TableVirtualizedPage = () => {

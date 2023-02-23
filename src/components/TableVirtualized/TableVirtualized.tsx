@@ -10,15 +10,19 @@ import {
 import 'react-virtualized/styles.css'
 import { Box } from '@mui/material'
 
-import type { TableCellProps, TableRowProps, TableHeaderRowProps } from 'react-virtualized'
+import type {
+  TableCellProps,
+  TableRowProps,
+  TableHeaderRowProps,
+  ColumnProps as VirtualizedColumnProps,
+} from 'react-virtualized'
+
 import type { Card } from 'pokemon-tcg-sdk-typescript/dist/sdk'
+import type { ReactNode } from 'react'
 
-interface ColumnProps {
-  dataKey: string
-  label: string
-  flexGrow: number
+interface ColumnProps extends VirtualizedColumnProps {
+  render?: (row: any, rawValue?: string | number, formatted?: string | number) => ReactNode
 }
-
 interface TableVirtualizedProps {
   columns: ColumnProps[]
   data: Card[]
@@ -53,7 +57,18 @@ const headerRowRenderer = ({ style, ...props }: TableHeaderRowProps) => {
 }
 
 export const TableVirtualized = ({ columns, data, loading }: TableVirtualizedProps) => {
-  function cellRenderer({ parent, rowIndex, columnIndex, cellData }: TableCellProps) {
+  const renderCell = (
+    cellData: TableCellProps['cellData'],
+    rowIndex: TableCellProps['rowIndex'],
+    columnIndex: TableCellProps['columnIndex']
+  ) => {
+    const column = columns[columnIndex]
+    if (column.render) return column.render(data[rowIndex])
+
+    return cellData
+  }
+
+  function cellRenderer({ parent, rowIndex, columnIndex, cellData, ...rest }: TableCellProps) {
     return (
       <CellMeasurer cache={cache} columnIndex={columnIndex} parent={parent} rowIndex={rowIndex}>
         {({ measure, registerChild }) => (
@@ -66,7 +81,7 @@ export const TableVirtualized = ({ columns, data, loading }: TableVirtualizedPro
             }}
             onLoad={measure}
           >
-            {cellData}
+            {renderCell(cellData, rowIndex, columnIndex)}
           </div>
         )}
       </CellMeasurer>
@@ -89,15 +104,8 @@ export const TableVirtualized = ({ columns, data, loading }: TableVirtualizedPro
               rowRenderer={rowRenderer}
               headerRowRenderer={headerRowRenderer}
             >
-              {columns.map((col) => (
-                <Column
-                  key={col.dataKey}
-                  dataKey={col.dataKey}
-                  label={col.label}
-                  width={1}
-                  cellRenderer={cellRenderer}
-                  flexGrow={col.flexGrow || 1}
-                />
+              {columns.map(({ dataKey, ...rest }) => (
+                <Column {...rest} key={dataKey} dataKey={dataKey} cellRenderer={cellRenderer} />
               ))}
             </Table>
           )
