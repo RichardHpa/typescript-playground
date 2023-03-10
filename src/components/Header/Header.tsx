@@ -22,6 +22,10 @@ const pages = [
     name: 'List Virtualized',
     path: '/list-virtualized',
   },
+  {
+    name: 'Table Virtualized Data',
+    path: '/table-virtualized-data',
+  },
 ]
 
 export const Header = () => {

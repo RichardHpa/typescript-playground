@@ -12,7 +12,10 @@ const columns = [
     dataKey: 'image.small',
     label: '',
     width: 50,
-    render: (row: any) => <Avatar alt={row.name} src={row.images.small} />,
+
+    render: (row: { name: string | undefined; images: { small: string | undefined } }) => (
+      <Avatar alt={row.name} src={row.images.small} />
+    ),
   },
   { dataKey: 'number', label: 'Number', width: 80 },
   { dataKey: 'name', label: 'Name', width: 200 },

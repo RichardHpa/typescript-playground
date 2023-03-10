@@ -8,7 +8,6 @@ import {
   defaultTableHeaderRowRenderer,
 } from 'react-virtualized'
 import 'react-virtualized/styles.css'
-import { Box } from '@mui/material'
 
 import type {
   TableCellProps,
@@ -17,16 +16,22 @@ import type {
   ColumnProps as VirtualizedColumnProps,
 } from 'react-virtualized'
 
-import type { Card } from 'pokemon-tcg-sdk-typescript/dist/sdk'
 import type { ReactNode } from 'react'
+import './Styles.css'
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type AnyObject = Record<string, any>
+type Model = AnyObject
+type Collection = Model[]
 
 interface ColumnProps extends VirtualizedColumnProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   render?: (row: any, rawValue?: string | number, formatted?: string | number) => ReactNode
 }
 interface TableVirtualizedProps {
   columns: ColumnProps[]
-  data: Card[]
-  loading: boolean
+  data: Collection
+  loading?: boolean
 }
 
 const cache = new CellMeasurerCache({
@@ -41,6 +46,7 @@ const rowRenderer = ({ style, ...props }: TableRowProps) => {
       backgroundColor: props.index % 2 === 0 ? 'white' : '#f2f2f2',
       alignItems: 'flex-start',
     },
+    className: `${props.className} row`,
   })
 }
 
@@ -80,6 +86,7 @@ export const TableVirtualized = ({ columns, data, loading }: TableVirtualizedPro
               padding: '10px 0',
             }}
             onLoad={measure}
+            className="cell"
           >
             {renderCell(cellData, rowIndex, columnIndex)}
           </div>
@@ -90,27 +97,32 @@ export const TableVirtualized = ({ columns, data, loading }: TableVirtualizedPro
 
   if (loading) return <div>Loading...</div>
   return (
-    <Box sx={{ display: 'flex', height: '100%' }}>
-      <AutoSizer>
-        {({ height, width }) => {
-          return (
-            <Table
-              width={width}
-              height={height}
-              headerHeight={50}
-              rowCount={data.length}
-              rowGetter={({ index }) => data[index]}
-              rowHeight={cache.rowHeight}
-              rowRenderer={rowRenderer}
-              headerRowRenderer={headerRowRenderer}
-            >
-              {columns.map(({ dataKey, ...rest }) => (
-                <Column {...rest} key={dataKey} dataKey={dataKey} cellRenderer={cellRenderer} />
-              ))}
-            </Table>
-          )
-        }}
-      </AutoSizer>
-    </Box>
+    <AutoSizer>
+      {({ height, width }) => {
+        return (
+          <Table
+            width={width}
+            height={height}
+            headerHeight={50}
+            rowCount={data.length}
+            rowGetter={({ index }) => data[index]}
+            rowHeight={cache.rowHeight}
+            rowRenderer={rowRenderer}
+            headerRowRenderer={headerRowRenderer}
+            className="table"
+          >
+            {columns.map(({ dataKey, ...rest }) => (
+              <Column
+                {...rest}
+                key={dataKey}
+                dataKey={dataKey}
+                cellRenderer={cellRenderer}
+                className="column"
+              />
+            ))}
+          </Table>
+        )
+      }}
+    </AutoSizer>
   )
 }

@@ -1,0 +1,48 @@
+/* .ReactVirtualized__Grid.ReactVirtualized__Table__Grid {
+  overflow: visible !important;
+}
+
+.ReactVirtualized__Table__row {
+  overflow: visible !important;
+}
+
+.ReactVirtualized__Table__rowColumn {
+  overflow: visible !important;
+} */
+
+/* .ReactVirtualized__Grid__innerScrollContainer {
+  overflow: visible !important;
+}
+
+.ReactVirtualized__Table__row {
+  overflow: visible !important;
+} */
+
+.ReactVirtualized__Grid.ReactVirtualized__Table__Grid {
+  position: static !important;
+}
+
+.table {
+  /* overflow: visible !important; */
+  /* overflow-x: hidden; */
+  /* overflow-y: auto; */
+}
+
+.column {
+  /* overflow: visible !important; */
+}
+
+.row {
+  /* overflow: visible !important; */
+}
+
+.cell {
+  /* overflow: visible !important; */
+}
+
+/* .ReactVirtualized__Table__rowColumn,
+.ReactVirtualized__Table__Grid,
+.ReactVirtualized__Grid,
+.ReactVirtualized__Grid__innerScrollContainer {
+  overflow: visible !important;
+} */
