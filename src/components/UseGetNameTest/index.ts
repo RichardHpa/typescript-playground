@@ -1,0 +1,1 @@
+export { UseGetNameTest } from './UseGetNameTest'
