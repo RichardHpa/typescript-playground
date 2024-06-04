@@ -6,6 +6,7 @@ import {
   TableVirtualizedPage,
   ListVirtualizedPage,
   TableVirtualizedDataPage,
+  ReactAutosuggest,
 } from './pages'
 import { Header } from './components/Header'
 import { Container, Box } from '@mui/material'
@@ -27,6 +28,7 @@ function App() {
             <Route path="table-virtualized" element={<TableVirtualizedPage />} />
             <Route path="list-virtualized" element={<ListVirtualizedPage />} />
             <Route path="table-virtualized-data" element={<TableVirtualizedDataPage />} />
+            <Route path="react-autosuggest" element={<ReactAutosuggest />} />
           </Routes>
         </Box>
       </Container>

@@ -26,6 +26,10 @@ const pages = [
     name: 'Table Virtualized Data',
     path: '/table-virtualized-data',
   },
+  {
+    name: 'React Autosuggest',
+    path: '/react-autosuggest',
+  },
 ]
 
 export const Header = () => {

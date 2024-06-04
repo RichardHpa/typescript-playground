@@ -1,0 +1,1 @@
+export { ReactAutosuggest } from './ReactAutosuggest'

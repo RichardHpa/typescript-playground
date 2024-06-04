@@ -1,7 +1,7 @@
 import { Box, Paper } from '@mui/material'
 
 import { TableVirtualized } from 'components/TableVirtualized'
-import { Datepicker, CustomDatePicker } from 'components/Datepicker'
+import { Datepicker } from 'components/Datepicker'
 import moment from 'moment'
 
 const data = [
